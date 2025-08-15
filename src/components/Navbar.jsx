@@ -18,8 +18,8 @@ const Navbar = () => {
   return (
     <nav className="px-4 sm:px-12 py-4 mt-14 sm:mt-18 shadow-md">
       <ul className="flex flex-wrap justify-between">
-        {categories.map((category) => (
-          <li className="bg-red-50 rounded-full px-4 py-1">
+        {categories.map((category, id) => (
+          <li key={id} className="bg-red-50 rounded-full px-4 py-1">
             {category.status}
           </li>
         ))}

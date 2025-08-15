@@ -6,22 +6,6 @@ import logo2 from "../assets/logo2.png";
 import logo3 from "../assets/logo3.png";
 
 const HomePage = () => {
-  /*useEffect(() => {
-    const fromApi = async () => {
-      try {
-        const data = await axios.get("");
-        const response = await data.json();
-        console.log(response);
-        setIsLoading(true);
-      } catch (error) {
-        console.error(`Error from package detais: ${error}`);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-  }, []);
-  */
-
   return (
     <section
       id="main"
