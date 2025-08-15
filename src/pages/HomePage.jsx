@@ -25,14 +25,21 @@ const HomePage = () => {
   return (
     <section
       id="main"
-      className="flex flex-col items-center justify-between px-4 sm:px-12 py-4 gap-8"
+      className="flex flex-col items-center justify-between px-4 sm:px-12 py-16 gap-8  mt-14 sm:mt-"
     >
-      <div className="text-center space-y-4">
-        <h2 className="text-4xl">What End-to-End Means for your Business</h2>
+      <div className="text-center space-y-4 ">
+        <h2 className="text-4xl text-[#f0721e]">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elits
+        </h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+          do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat. Duis aute irure dolor in
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur.
@@ -40,8 +47,10 @@ const HomePage = () => {
       </div>
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex flex-col items-center text-center gap-4">
-          <img src={logo1} alt="logo1" className="w-100" />
-          <h3 className="text-2xl">What End-to-End Means for your Business</h3>
+          <img src={logo1} alt="logo1" className="w-70" />
+          <h3 className="text-2xl text-[#f0721e]">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elits
+          </h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -52,8 +61,10 @@ const HomePage = () => {
           </p>
         </div>
         <div className="flex flex-col items-center text-center gap-4">
-          <img src={logo2} alt="logo2" className="w-100" />
-          <h3 className="text-2xl">What End-to-End Means for your Business</h3>
+          <img src={logo2} alt="logo2" className="w-70" />
+          <h3 className="text-2xl text-[#f0721e]">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elits
+          </h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -64,8 +75,10 @@ const HomePage = () => {
           </p>
         </div>
         <div className="flex flex-col items-center text-center gap-4">
-          <img src={logo3} alt="logo3" className="w-100" />
-          <h3 className="text-2xl">What End-to-End Means for your Business</h3>
+          <img src={logo3} alt="logo3" className="w-70" />
+          <h3 className="text-2xl text-[#f0721e]">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+          </h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -76,19 +89,12 @@ const HomePage = () => {
           </p>
         </div>
       </div>
-      <div className="flex space-x-4 md:space-x-20">
+      <div className="flex space-x-4 md:space-x-20 mt-10">
         <Link to={"/data"}>
           <button className="btn sm:btn-sm md:btn-md lg:btn-lg">
             View Data
           </button>
         </Link>
-
-        <button className="btn sm:btn-sm md:btn-md lg:btn-lg">
-          Responsive
-        </button>
-        <button className="btn sm:btn-sm md:btn-md lg:btn-lg">
-          Responsive
-        </button>
       </div>
     </section>
   );
