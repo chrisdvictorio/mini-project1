@@ -1,53 +1,95 @@
-import React from "react";
-
-import package1 from "../assets/try.png";
 import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+
+import logo1 from "../assets/logo1.png";
+import logo2 from "../assets/logo2.png";
+import logo3 from "../assets/logo3.png";
 
 const HomePage = () => {
-  const packages = [
-    { packageId: 1, status: "Pending" },
-    { packageId: 2, status: "Accepted" },
-    { packageId: 3, status: "Rejected" },
-    { packageId: 4, status: "Loaded to Container" },
-    { packageId: 5, status: "In Transit" },
-    { packageId: 6, status: "In Customs Processing" },
-    { packageId: 7, status: "Handed to Trucking Services" },
-    { packageId: 8, status: "Out for Delivery" },
-    { packageId: 9, status: "Delivered" },
-    { packageId: 10, status: "Package Lost" },
-    { packageId: 11, status: "Failed Delivery" },
-  ];
+  /*useEffect(() => {
+    const fromApi = async () => {
+      try {
+        const data = await axios.get("");
+        const response = await data.json();
+        console.log(response);
+        setIsLoading(true);
+      } catch (error) {
+        console.error(`Error from package detais: ${error}`);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+  }, []);
+  */
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-4 py-4 sm:px-8 lg:px-12">
-      {packages.map((item) => (
-        <Link to={`/data/${item.packageId}`}>
-          <div className="flex flex-col rounded-lg p-4 h-53 gap-8 border border-[#EAECED] bg-[#F3F5F9]">
-            <div className="flex items-center justify-between h-full">
-              <div className="flex flex-col items-start gap-4">
-                <div className="px-4 rounded-full bg-red-100 relative">
-                  <p>{item.status}</p>
-                </div>
-                <p>#PACKAGEID: {item.packageId}</p>
-                <div>
-                  <p className="font-light text-[#686C6F]">Delivery date</p>
-                  <p>test</p>
-                </div>
-              </div>
-              <img
-                src="https://www.burnettandhillman.co.uk/wp-content/uploads/2024/09/package-150x150.png"
-                alt="package"
-                className="size-30"
-              />
-            </div>
-            <progress
-              className="progress progress-primary w-full h-full rounded-full"
-              value={20}
-              max="100"
-            ></progress>
-          </div>
+    <section
+      id="main"
+      className="flex flex-col items-center justify-between px-4 sm:px-12 py-4 gap-8"
+    >
+      <div className="text-center space-y-4">
+        <h2 className="text-4xl">What End-to-End Means for your Business</h2>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur.
+        </p>
+      </div>
+      <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col items-center text-center gap-4">
+          <img src={logo1} alt="logo1" className="w-100" />
+          <h3 className="text-2xl">What End-to-End Means for your Business</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur.
+          </p>
+        </div>
+        <div className="flex flex-col items-center text-center gap-4">
+          <img src={logo2} alt="logo2" className="w-100" />
+          <h3 className="text-2xl">What End-to-End Means for your Business</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur.
+          </p>
+        </div>
+        <div className="flex flex-col items-center text-center gap-4">
+          <img src={logo3} alt="logo3" className="w-100" />
+          <h3 className="text-2xl">What End-to-End Means for your Business</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur.
+          </p>
+        </div>
+      </div>
+      <div className="flex space-x-4 md:space-x-20">
+        <Link to={"/data"}>
+          <button className="btn sm:btn-sm md:btn-md lg:btn-lg">
+            View Data
+          </button>
         </Link>
-      ))}
+
+        <button className="btn sm:btn-sm md:btn-md lg:btn-lg">
+          Responsive
+        </button>
+        <button className="btn sm:btn-sm md:btn-md lg:btn-lg">
+          Responsive
+        </button>
+      </div>
     </section>
   );
 };
