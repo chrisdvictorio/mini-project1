@@ -1,29 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import useFetch from "../hooks/useFetch";
 
 const PackageById = () => {
-  const [packageData, setPackageData] = useState(null);
   const { id } = useParams();
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const response = await axios.get(
-          `http://localhost:8080/api/trackingEvents/${id}`
-        );
-        console.log(response.data);
-        setPackageData(response.data);
-      } catch (error) {
-        console.error(`Error from package by id: ${error}!`);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, [id]);
+  const {
+    data: packageData,
+    isLoading,
+    error,
+  } = useFetch(`http://localhost:8080/api/trackingEvents/${id}`, null);
 
   if (isLoading)
     return (
@@ -38,6 +24,12 @@ const PackageById = () => {
     if (!date) return "N/A";
     return new Date(date).toLocaleString();
   };
+
+  if (error) {
+    return (
+      <div className="text-center text-red-500">Failed to load data...</div>
+    );
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6 mt-10">

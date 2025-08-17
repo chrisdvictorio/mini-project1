@@ -5,33 +5,13 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import Package from "../components/Package";
+import useFetch from "../hooks/useFetch";
 
 const PackageDetail = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [packages, setPackages] = useState([]);
+  const { data, isLoading, error } = useFetch("http://localhost:8080/api/trackingEvents", []);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const response = await axios.get(
-          "http://localhost:8080/api/trackingEvents"
-        );
-        const data = await response.data;
-        console.log(data);
-        setPackages(data);
-      } catch (error) {
-        console.error(`Error: ${error}`);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const searchFiltered = packages.filter((item) => {
+  const searchFiltered = data.filter((item) => {
     return (
       item.tracking_event_id?.toString().toLowerCase().includes(search.toLowerCase()) ||
       item.pkg?.packageId.toString().toLowerCase().includes(search.toLowerCase()) ||
@@ -39,6 +19,10 @@ const PackageDetail = () => {
       item.pkg?.deliveryDate.toLowerCase().includes(search.toLowerCase())
     );
   });
+
+  if (error) {
+    return <div className="text-center text-red-500">Failed to load data...</div>
+  }
 
   return (
     <>

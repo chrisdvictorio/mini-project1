@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import useFetch from "../hooks/useFetch";
 
 const categories = [
   "Pending",
@@ -17,27 +18,8 @@ const categories = [
 
 const Navbar = () => {
   const [selectedStatus, setSelectedStatus] = useState("Pending");
-  const [allPackages, setAllPackages] = useState([]);
   const [filteredPackages, setFilteredPackages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchAll = async () => {
-      try {
-        setIsLoading(true);
-        const response = await axios.get(
-          "http://localhost:8080/api/trackingEvents"
-        );
-        console.log("From navbar:", response.data);
-        setAllPackages(response.data);
-      } catch (error) {
-        console.error("Error fetching tracking events:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchAll();
-  }, []);
+  const { data: allPackages, isLoading, error } = useFetch("http://localhost:8080/api/trackingEvents", []);
 
   useEffect(() => {
     if (allPackages.length > 0) {
