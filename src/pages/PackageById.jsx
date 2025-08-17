@@ -28,7 +28,7 @@ const PackageById = () => {
   if (isLoading)
     return (
       <div className="flex justify-center mt-10">
-        <span className="loading loading-bars loading-lg"></span>
+        <span className="loading loading-bars loading-lg mt-[10rem]"></span>
       </div>
     );
   if (!packageData)
@@ -45,7 +45,7 @@ const PackageById = () => {
         <div className="card-body space-y-6">
           <div>
             <h2 className="text-2xl font-semibold text-gray-800">
-              Package #{packageData.tracking_event_id}
+              Tracking #{packageData.tracking_event_id}
             </h2>
             <p className="text-sm text-gray-500 mt-1">
               {packageData.description}

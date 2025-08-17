@@ -11,7 +11,8 @@ const Package = ({ item }) => {
           <div className="px-4 rounded-full bg-red-100 relative">
             <p>{item.packageStatus?.statusName}</p>
           </div>
-          <p>Package: {item.pkg?.packageId}</p>
+          <p>Tracking Number: {item?.tracking_event_id}</p>
+          <p>Package ID: {item.pkg?.packageId}</p>
           <div>
             <p className="font-light text-[#686C6F]">Delivery date</p>
             <p>{item.pkg?.deliveryDate}</p>
