@@ -1,36 +1,143 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
-const PackageById = ({ item }) => {
-  const [packageId, setPackageId] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-
-  const fetchData = async (item) => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/api/trackingEvents/${item.tracking_event_id}`
-      );
-      const data = await response.data;
-      console.log(data);
-      // setIsLoading(true);
-      setPackageId(data);
-    } catch (error) {
-      console.error(`Error: ${error}`);
-    } finally {
-      // setIsLoading(false);
-    }
-  };
+const PackageById = () => {
+  const [packageData, setPackageData] = useState(null);
+  const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.get(
+          `http://localhost:8080/api/trackingEvents/${id}`
+        );
+        console.log(response.data);
+        setPackageData(response.data);
+      } catch (error) {
+        console.error(`Error from package by id: ${error}!`);
+      } finally {
+        setIsLoading(false);
+      }
+    };
     fetchData();
-  }, []);
+  }, [id]);
+
+  if (isLoading)
+    return (
+      <div className="flex justify-center mt-10">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
+  if (!packageData)
+    return <p className="text-center mt-10">No package found.</p>;
+
+  const formatDate = (date) => {
+    if (!date) return "N/A";
+    return new Date(date).toLocaleString();
+  };
 
   return (
-    <div
-      className="flex flex-col items-center justify-between px-4 sm:px-12 py-16 gap-8 mt-14"
-      id="packag-by-id"
-    >
-      {/* <h3>Sender: {packageId.description}</h3> */}
+    <div className="max-w-4xl mx-auto p-6 mt-10">
+      <div className="card bg-white shadow-lg rounded-2xl border border-gray-200">
+        <div className="card-body space-y-6">
+          <div>
+            <h2 className="text-2xl font-semibold text-gray-800">
+              Package #{packageData.tracking_event_id}
+            </h2>
+            <p className="text-sm text-gray-500 mt-1">
+              {packageData.description}
+            </p>
+            <div className="mt-3">
+              <span className="badge badge-outline">
+                {packageData.packageStatus.statusName}
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-medium text-lg mb-2 text-gray-700">
+              Package Info
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-4 text-sm">
+              <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
+                <p>
+                  <strong>Package ID:</strong> {packageData.pkg.packageId}
+                </p>
+                <p>
+                  <strong>Weight:</strong> {packageData.pkg.weight} kg
+                </p>
+                <p>
+                  <strong>Type ID:</strong> {packageData.pkg.packageTypeId}
+                </p>
+              </div>
+              <div className="p-4 rounded-lg bg-gray-50 border border-gray-200">
+                <p>
+                  <strong>Pickup:</strong>{" "}
+                  {formatDate(packageData.pkg.pickUpDate)}
+                </p>
+                <p>
+                  <strong>Delivery:</strong>{" "}
+                  {formatDate(packageData.pkg.deliveryDate)}
+                </p>
+                <p>
+                  <strong>Created At:</strong>{" "}
+                  {formatDate(packageData.pkg.createdAt)}
+                </p>
+              </div>
+            </div>
+            <div className="mt-3 p-4 rounded-lg bg-gray-50 border border-gray-200 text-sm">
+              <p>
+                <strong>Contents:</strong> {packageData.pkg.contentsDescription}
+              </p>
+              <p>
+                <strong>Sender ID:</strong> {packageData.pkg.senderId}
+              </p>
+              <p>
+                <strong>Recipient ID:</strong> {packageData.pkg.recipientId}
+              </p>
+              <p>
+                <strong>Courier ID:</strong> {packageData.pkg.courierId}
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-medium text-lg mb-2 text-gray-700">Location</h3>
+            <div className="p-4 rounded-lg bg-gray-50 border border-gray-200 text-sm">
+              <p>
+                <strong>Location ID:</strong> {packageData.location.location_id}
+              </p>
+              <p>
+                <strong>City:</strong> {packageData.location.city.name}
+              </p>
+              <p>
+                <strong>City Address ID:</strong>{" "}
+                {packageData.location.city.address_id}
+              </p>
+              <p>
+                <strong>Contact:</strong> {packageData.location.contact_number}
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-medium text-lg mb-2 text-gray-700">Metadata</h3>
+            <div className="p-4 rounded-lg bg-gray-50 border border-gray-200 text-sm">
+              <p>
+                <strong>Tracking Created:</strong>{" "}
+                {formatDate(packageData.created_at)}
+              </p>
+              <p>
+                <strong>Last Updated:</strong>{" "}
+                {formatDate(packageData.updated_at)}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
